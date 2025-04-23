@@ -61,7 +61,7 @@ Oppsy, I almost forgot, there is one more resource that should only be with the 
 
 I also created three new users corresponding to each team named `Developer-UA`, `Tester-UA`, and `ITOps-UA` respectively.
 
-![Team-to-resource mapping diagram](/resource-groups.png)
+![Team-to-resource mapping diagram](./images/resource-groups.png)
 
 ### 2. RBAC Configurations:
 
@@ -91,7 +91,7 @@ That’s where the `Key Vault Contributor` role comes in, it grants permission t
 
 Since this built-in role can be assigned directly via the Azure portal, you can follow Microsoft's guide [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) to complete this step.
 
-![Key Vault Contributor role assigned to user](/kvc-role.png)
+![Key Vault Contributor role assigned to user](./images/kvc-role.png)
 
 #### 2.3. Assign `Backup Contributor` role (scoped to IT Operations Team)
 
@@ -103,7 +103,7 @@ initiate restores, and manage backup items without gaining unnecessary access to
 
 You can assign this role via the Recovery Vault's portal just like we did with the `Key Vault Contributor` role.
 
-![Backup Contributor role assigned to ITOps-UA](/backup-role.png)
+![Backup Contributor role assigned to ITOps-UA](./images/backup-role.png)
 
 ---
 
@@ -123,7 +123,7 @@ and are separate from Azure RBAC configured above and provide fine-grained permi
 
 In this project, I set up the policy to only allowed `Get` and `List` permissions to the assigned user per vault, guaranteeing that users can read and reference values without the ability to alter or delete them, limiting potential misuse or accidental overwrites.
 
-![Add access policy with custom permissions](/key-vault-access-policy.png)
+![Add access policy with custom permissions](./images/key-vault-access-policy.png)
 
 ### 2. Network Access Restrictions
 
@@ -131,7 +131,7 @@ Allowing connections from all over the internet poses extreme risks to the Key V
 Instead, configure each vault to only accept traffic from the virtual network or specific subnets in the respective team's resource group.
 This stacks another protection on the defensive arsenal by blocking unauthorized IPs or services from even attempting to reach the Key Vault endpoint.
 
-![Limit network access for Azure Key Vault](/network-limitations.png)
+![Limit network access for Azure Key Vault](./images/network-limitations.png)
 
 ---
 
@@ -145,7 +145,7 @@ I created a custom backup policy and applied it to all production VMs across tea
 - **Daily restore points** retained for 30 days.
 - Stored everything inside a single **Recovery Vault** controlled by IT only.
 
-![Backup policy settings](/backup-policy-settings.png)
+![Backup policy settings](./images/backup-policy-settings.png)
 
 ---
 
